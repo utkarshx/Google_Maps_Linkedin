@@ -95,7 +95,6 @@
         var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
         //Map Creation Done
 
-        add_markers();
       }
 
       function add_markers()
@@ -121,7 +120,8 @@
         }
         //Done adding Marker And Marker info
       }
-
+     add_markers();
+   
       //this runs first and calls the initialize function
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
