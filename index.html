@@ -37,7 +37,6 @@
         //this discplays the connections
         IN.API.Connections("me")
         .params({"count":3})
-        .fields("firstName")
         .result(displayConnections)
         .error(displayConnectionsErrors);
       }
@@ -51,28 +50,26 @@
 
       //This is used to display the connections.
       function displayConnections(connections) {
-        alert("Got here");
-        alert(JSON.stringify(connections));
-      var connectionsDiv = document.getElementById("connections");
+        var connectionsDiv = document.getElementById("connections");
 
-      var members = connections.values; // The list of members you are connected to
-      alert(JSON.stringify(members));
-      var location =[];
-      var user = [];
-      var i=0;
-      for (var member in members) {
-      location[i]=members[member].location.name;
-      user[i]=members[member].firstName + " " + members[member].lastName;
-        connectionsDiv.innerHTML += "<p>" + members[member].firstName + " " + members[member].lastName
-          + " works in the " + members[member].industry + " industry"+" "+ members[member].location.name;
-        i++;
-      }  
-      initialize(location,user);
-    }
+        var members = connections.values; // The list of members you are connected to
+        alert(JSON.stringify(members));
+        var location =[];
+        var user = [];
+        var i=0;
+        for (var member in members) {
+        location[i]=members[member].location.name;
+        user[i]=members[member].firstName + " " + members[member].lastName;
+          connectionsDiv.innerHTML += "<p>" + members[member].firstName + " " + members[member].lastName
+            + " works in the " + members[member].industry + " industry"+" "+ members[member].location.name;
+          i++;
+        }  
+        initialize(location,user);
+      }
 
-    function displayConnectionsErrors(error) { 
-      alert(JSON.stringify(error));
-     }
+      function displayConnectionsErrors(error) { 
+        alert(JSON.stringify(error));
+       }
     </script>
 
 
