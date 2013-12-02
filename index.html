@@ -64,6 +64,7 @@
             + " works in the " + members[member].industry + " industry"+" "+ members[member].location.name + ""+ members[member].siteStandardProfileRequest.url + "   " + members[member].pictureUrl+"</p>";
           i++;
         }  
+        linkedinmarker();
         //initialize(location,user);
       }
 
@@ -96,7 +97,9 @@
         }
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
         //Map Creation Done
+      }
 
+      function linkedinmarker(){
         //Now we are putting up the Markers and Infowindow
         var infowindow = new google.maps.InfoWindow();
         var marker, i;
