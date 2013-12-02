@@ -86,13 +86,13 @@
       ];
 
       var map;
+      var bounds;
 
       function initialize() {        
         //Creating the Map Here
         var myLatlng = new google.maps.LatLng(-33.363882,151.044922);
+        bounds = new google.maps.LatLngBounds();
         var mapOptions = {
-          zoom: 8,
-          center: myLatlng,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
@@ -105,8 +105,10 @@
         var marker, i;
         for (i = 0; i < locations.length; i++) {  
           //Adding Marker
+          var position = new google.maps.LatLng(locations[i][1], locations[i][2]);
+          bounds.extend(position);
           marker = new google.maps.Marker({
-            position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+            position: position,
             map: map
           });
           //Done Adding Market
@@ -118,8 +120,15 @@
               }
             })(marker, i));
           //Done Adding Marker info
+          map.fitBounds(bounds);
         }
         //Done adding Marker And Marker info
+
+        // Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
+        var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
+            this.setZoom(14);
+            google.maps.event.removeListener(boundsListener);
+        });
       }
 
       function addmarker() {
