@@ -64,7 +64,7 @@
             + " works in the " + members[member].industry + " industry"+" "+ members[member].location.name + ""+ members[member].siteStandardProfileRequest.url + "   " + members[member].pictureUrl+"</p>";
           i++;
         }  
-        initialize(location,user);
+        ////initialize(location,user);
       }
 
       function displayConnectionsErrors(error) { 
@@ -95,6 +95,11 @@
         var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
         //Map Creation Done
 
+        add_markers();
+      }
+
+      function add_markers()
+      {
         //Now we are putting up the Markers and Infowindow
         var infowindow = new google.maps.InfoWindow();
         var marker, i;
