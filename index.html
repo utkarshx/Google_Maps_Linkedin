@@ -64,8 +64,7 @@
             + " works in the " + members[member].industry + " industry"+" "+ members[member].location.name + ""+ members[member].siteStandardProfileRequest.url + "   " + members[member].pictureUrl+"</p>";
           i++;
         }  
-        linkedinmarker();
-        //initialize(location,user);
+        linkedinmarker(location,user);
       }
 
       function displayConnectionsErrors(error) { 
@@ -77,14 +76,6 @@
     <!-- We are Synchronously loading the Map Script -->
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
     <script>
-      var locations = [
-        ['Bondi Beach', -33.890542, 151.274856, 4],
-        ['Coogee Beach', -33.923036, 151.259052, 5],
-        ['Cronulla Beach', -34.028249, 151.157507, 3],
-        ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
-        ['Maroubra Beach', -33.950198, 151.259302, 1]
-      ];
-
       var map;
       var bounds;
 
@@ -101,13 +92,25 @@
         //Map Creation Done
       }
 
-      function linkedinmarker(){
+      function linkedinmarker(locations,users){
         //Now we are putting up the Markers and Infowindow
         var infowindow = new google.maps.InfoWindow();
         var marker, i;
         for (i = 0; i < locations.length; i++) {  
+          //finding the latLong from the Location
+          var geocoder = new google.maps.Geocoder();
+          var address = locations[i];
+          geocoder.geocode({ 'address': address }, function (results, status) 
+            {
+              if (status == google.maps.GeocoderStatus.OK) 
+              {
+                latitude = results[0].geometry.location.lat();
+                longitude = results[0].geometry.location.lng();
+              }
+            }
+          );
           //Adding Marker
-          var position = new google.maps.LatLng(locations[i][1], locations[i][2]);
+          var position = new google.maps.LatLng(latitude, longitude);
           bounds.extend(position);
           marker = new google.maps.Marker({
             position: position,
@@ -117,7 +120,7 @@
           //Adding MarkerInfo
           google.maps.event.addListener(marker, 'click', (function(marker, i) {
               return function() {
-                infowindow.setContent(locations[i][0]);
+                infowindow.setContent(users[i]);
                 infowindow.open(map, marker);
               }
             })(marker, i));
