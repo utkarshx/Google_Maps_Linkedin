@@ -117,6 +117,15 @@
         //Done adding Marker And Marker info
       }
 
+      function addmarker() {
+        var marker1 = new google.maps.Marker({
+          position: new google.maps.LatLng(-3.363882,151.044922),
+          title: 'new marker',
+          map: map
+        });
+        map.setCenter(marker1.getPosition())
+      }
+
       //this runs first and calls the initialize function
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
@@ -128,7 +137,7 @@
     <!-- 4. Placeholder for the greeting -->
     <div id="profiles"></div>
     <div id="connections"></div>
-
+    <a onclick="addmarker()">Put</a>
     <!-- Displaying the Map -->
     <div id="map_wrapper">
       <div id="map-canvas"></div>
