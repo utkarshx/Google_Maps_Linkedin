@@ -10,7 +10,65 @@
         margin: 0px;
         padding: 0px
       }
+
+      #map_wrapper{
+        height: 50%;
+        width: 50%;
+      }
     </style>
+
+    <!-- 1. Include the LinkedIn JavaScript API and define a onLoad callback function -->
+    <script type="text/javascript" src="http://studydomain.com/linkedin/in.js">
+      api_key: fci8m21hxpr4
+      onLoad: onLinkedInLoad
+      authorize: true
+    </script>
+
+    <script type="text/javascript">
+      // 2. Runs when the JavaScript framework is loaded
+      function onLinkedInLoad() {
+        IN.Event.on(IN, "auth", onLinkedInAuth);
+      }
+
+      // 2. Runs when the viewer has authenticated
+      function onLinkedInAuth() {
+        IN.API.Profile("me").result(displayProfiles);
+      IN.API.Connections("me")
+        .fields("firstName", "lastName", "industry","location","id","picture-url")
+        .result(displayConnections)
+        .error(displayConnectionsErrors);
+
+      }
+
+      // 2. Runs when the Profile() API call returns successfully
+      function displayProfiles(profiles) {
+        member = profiles.values[0];
+        document.getElementById("profiles").innerHTML = 
+          "<p id=\"" + member.id + "\">Hello " +  member.firstName + " " + member.lastName + "</p>";
+      }
+      function displayConnections(connections) {
+      var connectionsDiv = document.getElementById("connections");
+
+      var members = connections.values; // The list of members you are connected to
+      //alert(JSON.stringify(members));
+      var location =[];
+      var user = [];
+      var i=0;
+      for (var member in members) {
+      location[i]=members[member].location.name;
+      user[i]=members[member].firstName + " " + members[member].lastName;
+        connectionsDiv.innerHTML += "<p>" + members[member].firstName + " " + members[member].lastName
+          + " works in the " + members[member].industry + " industry"+" "+ members[member].location.name;
+        i++;
+      }  
+      initialize(location,user);
+    }
+
+    function displayConnectionsErrors(error) { /* do nothing */ }
+    </script>
+
+
+    <!-- We are Synchronously loading the Map Script -->
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
     <script>
       var locations = [
@@ -23,9 +81,9 @@
 
       function initialize() {        
         //Creating the Map Here
-        var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
+        var myLatlng = new google.maps.LatLng(-33.363882,151.044922);
         var mapOptions = {
-          zoom: 10,
+          zoom: 8,
           center: myLatlng,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
@@ -59,6 +117,16 @@
     </script>
   </head>
   <body>
-    <div id="map-canvas"></div>
+    <!-- 3. Displays a button to let the viewer authenticate -->
+    <script type="IN/Login"></script>
+
+    <!-- 4. Placeholder for the greeting -->
+    <div id="profiles"></div>
+    <div id="connections"></div>
+
+    <!-- Displaying the Map -->
+    <div id="map_wrapper">
+      <div id="map-canvas"></div>
+    </div>
   </body>
 </html>
