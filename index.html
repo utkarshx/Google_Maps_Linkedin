@@ -100,6 +100,7 @@
           //finding the latLong from the Location
           var geocoder = new google.maps.Geocoder();
           var address = locations[i];
+          alert(address);
           geocoder.geocode({ 'address': address }, function (results, status) 
             {
               if (status == google.maps.GeocoderStatus.OK) 
