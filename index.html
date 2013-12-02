@@ -109,6 +109,8 @@
               }
             }
           );
+          alert(latitude);
+          alert(longitude);
           //Adding Marker
           var position = new google.maps.LatLng(latitude, longitude);
           bounds.extend(position);
@@ -132,22 +134,6 @@
         // Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
         var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
             this.setZoom(6);
-            google.maps.event.removeListener(boundsListener);
-        });
-      }
-
-      function addmarker() {
-        var pos = new google.maps.LatLng(-3.363882,151.044922);
-        var marker1 = new google.maps.Marker({
-          position: pos,
-          title: 'new marker',
-          map: map
-        });
-        bounds.extend(pos);
-        map.fitBounds(bounds);
-        // Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
-        var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
-            this.setZoom(10);
             google.maps.event.removeListener(boundsListener);
         });
       }
