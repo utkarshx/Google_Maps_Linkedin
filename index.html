@@ -58,10 +58,10 @@
         var user = [];
         var i=0;
         for (var member in members) {
-        location[i]=members[member].location.name;
-        user[i]=members[member].firstName + " " + members[member].lastName;
+          location[i]=members[member].location.name;
+          user[i]=members[member].firstName + " " + members[member].lastName;
           connectionsDiv.innerHTML += "<p>" + members[member].firstName + " " + members[member].lastName
-            + " works in the " + members[member].industry + " industry"+" "+ members[member].location.name;
+            + " works in the " + members[member].industry + " industry"+" "+ members[member].location.name + ""+ members[member].siteStandardProfileRequest.url+"</p>";
           i++;
         }  
         initialize(location,user);
