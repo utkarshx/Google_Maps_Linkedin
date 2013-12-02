@@ -126,18 +126,25 @@
 
         // Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
         var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
-            this.setZoom(14);
+            this.setZoom(10);
             google.maps.event.removeListener(boundsListener);
         });
       }
 
       function addmarker() {
+        var pos = new google.maps.LatLng(-3.363882,151.044922);
         var marker1 = new google.maps.Marker({
-          position: new google.maps.LatLng(-3.363882,151.044922),
+          position: pos,
           title: 'new marker',
           map: map
         });
-        map.setCenter(marker1.getPosition())
+        bounds.extend(pos);
+        map.fitBounds(bounds);
+        // Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
+        var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
+            this.setZoom(10);
+            google.maps.event.removeListener(boundsListener);
+        });
       }
 
       //this runs first and calls the initialize function
