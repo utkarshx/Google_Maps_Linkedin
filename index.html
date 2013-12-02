@@ -84,6 +84,8 @@
         ['Maroubra Beach', -33.950198, 151.259302, 1]
       ];
 
+      var map;
+
       function initialize() {        
         //Creating the Map Here
         var myLatlng = new google.maps.LatLng(-33.363882,151.044922);
@@ -92,7 +94,7 @@
           center: myLatlng,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
-        var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
         //Map Creation Done
 
         //Now we are putting up the Markers and Infowindow
