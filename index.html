@@ -37,6 +37,7 @@
         //this discplays the connections
         IN.API.Connections("me")
         .params({"count":3})
+        .fields("firstName")
         .result(displayConnections)
         .error(displayConnectionsErrors);
       }
