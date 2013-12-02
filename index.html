@@ -96,6 +96,8 @@
         //Now we are putting up the Markers and Infowindow
         var infowindow = new google.maps.InfoWindow();
         var marker, i;
+        var latitude=0;
+        var longitude=0;
         for (i = 0; i < locations.length; i++) {  
           //finding the latLong from the Location
           var geocoder = new google.maps.Geocoder();
