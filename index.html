@@ -90,6 +90,7 @@
         }
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
         //Map Creation Done
+                  getLatLong("Santa Clara");
       }
 
       function linkedinmarker(locations,users){
@@ -132,7 +133,6 @@
             })(marker, i));
           //Done Adding Marker info
           map.fitBounds(bounds);
-          getLatLong("Santa Clara");
         }
         //Done adding Marker And Marker info
 
@@ -141,6 +141,7 @@
         function getLatLong(address) {
           var geocoder = new google.maps.Geocoder();
           var result = "";
+          alert("Here at getLatLong");
           geocoder.geocode( { 'address': address, 'region': 'uk' }, function(results, status) {
                if (status == google.maps.GeocoderStatus.OK) {
                    result[lat] = results[0].geometry.location.Pa;
