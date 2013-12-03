@@ -118,10 +118,11 @@
                   map: map
                 });
                 //Done Adding Market
+                alert(users[i]);
                 //Adding MarkerInfo
                 google.maps.event.addListener(marker, 'click', (function(marker, i) {
                     return function() {
-                      infowindow.setContent(users[i]);
+                      infowindow.setContent("hello");
                       infowindow.open(map, marker);
                     }
                   })(marker, i));
@@ -129,7 +130,7 @@
               }
             }
           );
-          
+
           map.fitBounds(bounds);
         }
         //Done adding Marker And Marker info
