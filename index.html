@@ -111,11 +111,12 @@
               {
                 latitude = results[0].geometry.location.lat();
                 longitude = results[0].geometry.location.lng();
+                alert(latitude);
+                alert(longitude);
               }
             }
           );
-          alert(latitude);
-          alert(longitude);
+          
           //Adding Marker
           var position = new google.maps.LatLng(latitude, longitude);
           bounds.extend(position);
