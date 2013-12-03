@@ -90,7 +90,6 @@
         }
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
         //Map Creation Done
-                  getLatLong("Santa Clara");
       }
 
       function linkedinmarker(locations,users){
@@ -111,50 +110,29 @@
               {
                 latitude = results[0].geometry.location.lat();
                 longitude = results[0].geometry.location.lng();
-                alert(latitude);
-                alert(longitude);
+                //Adding Marker
+                var position = new google.maps.LatLng(latitude, longitude);
+                bounds.extend(position);
+                marker = new google.maps.Marker({
+                  position: position,
+                  map: map
+                });
+                //Done Adding Market
+                //Adding MarkerInfo
+                google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                    return function() {
+                      infowindow.setContent(users[i]);
+                      infowindow.open(map, marker);
+                    }
+                  })(marker, i));
+                //Done Adding Marker info
               }
             }
           );
           
-          //Adding Marker
-          var position = new google.maps.LatLng(latitude, longitude);
-          bounds.extend(position);
-          marker = new google.maps.Marker({
-            position: position,
-            map: map
-          });
-          //Done Adding Market
-          //Adding MarkerInfo
-          google.maps.event.addListener(marker, 'click', (function(marker, i) {
-              return function() {
-                infowindow.setContent(users[i]);
-                infowindow.open(map, marker);
-              }
-            })(marker, i));
-          //Done Adding Marker info
           map.fitBounds(bounds);
         }
         //Done adding Marker And Marker info
-
-
-        //TEsting the GeoCoding Function
-        function getLatLong(address) {
-          var geocoder = new google.maps.Geocoder();
-          var result = "";
-          alert("Here at getLatLong");
-          geocoder.geocode( { 'address': address, 'region': 'uk' }, function(results, status) {
-               if (status == google.maps.GeocoderStatus.OK) {
-                   result[lat] = results[0].geometry.location.Pa;
-                   result[lng] = results[0].geometry.location.Qa;
-               } else {
-                   result = "Unable to find address: " + status;
-               }
-               alert(result[lat]);
-               alert(result[lng]);
-              });
-          }
-
 
         // Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
         var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
