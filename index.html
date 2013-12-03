@@ -132,8 +132,27 @@
             })(marker, i));
           //Done Adding Marker info
           map.fitBounds(bounds);
+          getLatLong("Santa Clara");
         }
         //Done adding Marker And Marker info
+
+
+        //TEsting the GeoCoding Function
+        function getLatLong(address) {
+          var geocoder = new google.maps.Geocoder();
+          var result = "";
+          geocoder.geocode( { 'address': address, 'region': 'uk' }, function(results, status) {
+               if (status == google.maps.GeocoderStatus.OK) {
+                   result[lat] = results[0].geometry.location.Pa;
+                   result[lng] = results[0].geometry.location.Qa;
+               } else {
+                   result = "Unable to find address: " + status;
+               }
+               alert(result[lat]);
+               alert(result[lng]);
+              });
+          }
+
 
         // Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
         var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
